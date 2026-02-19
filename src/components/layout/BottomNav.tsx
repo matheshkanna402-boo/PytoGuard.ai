@@ -8,7 +8,7 @@ const navItems = [
     { href: "/library", label: "Library", icon: "local_library" },
     { href: "/scanner", label: "Scan", icon: "camera", isFab: true },
     { href: "/garden", label: "Garden", icon: "potted_plant" },
-    { href: "/admin", label: "Profile", icon: "account_circle" },
+    { href: "/profile", label: "Profile", icon: "account_circle" },
 ];
 
 export function BottomNav() {
