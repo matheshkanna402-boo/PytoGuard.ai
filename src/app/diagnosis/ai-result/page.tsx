@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 
 interface DiagnosisResult {
     name: string;
@@ -22,9 +23,44 @@ interface DiagnosisResult {
 
 export default function AIResultPage() {
     const router = useRouter();
+    const { user } = useUser();
     const [diagnosis, setDiagnosis] = useState<DiagnosisResult | null>(null);
     const [image, setImage] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState<"organic" | "chemical">("organic");
+    const [saving, setSaving] = useState(false);
+    const [saved, setSaved] = useState(false);
+
+    const handleSave = async () => {
+        if (!diagnosis || !user || saved) return;
+        setSaving(true);
+        try {
+            await fetch("/api/scans", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userId: user.id,
+                    imageUrl: image || null,
+                    diseaseName: diagnosis.name,
+                    scientificName: diagnosis.scientificName,
+                    confidence: diagnosis.confidence,
+                    severity: diagnosis.severity,
+                    symptoms: diagnosis.symptoms,
+                    treatments: {
+                        organic: diagnosis.organicControl,
+                        chemical: diagnosis.chemicalControl,
+                    },
+                    prevention: diagnosis.prevention,
+                    proTip: diagnosis.proTip,
+                    isHealthy: diagnosis.isHealthy,
+                }),
+            });
+            setSaved(true);
+        } catch (err) {
+            console.error("Save failed:", err);
+        } finally {
+            setSaving(false);
+        }
+    };
 
     useEffect(() => {
         const stored = sessionStorage.getItem("ai-diagnosis");
@@ -244,9 +280,16 @@ export default function AIResultPage() {
                         <span className="material-symbols-outlined">photo_camera</span>
                         Scan Again
                     </Link>
-                    <button className="flex-1 bg-black text-white font-bold py-4 px-6 rounded-full shadow-xl flex items-center justify-center gap-2 transform active:scale-95 transition-all hover:shadow-2xl ring-4 ring-white">
-                        <span className="material-symbols-outlined">bookmark_add</span>
-                        Save
+                    <button
+                        onClick={handleSave}
+                        disabled={saving || saved}
+                        className={`flex-1 font-bold py-4 px-6 rounded-full shadow-xl flex items-center justify-center gap-2 transform active:scale-95 transition-all hover:shadow-2xl ring-4 ring-white ${saved ? "bg-primary text-black" : "bg-black text-white"
+                            }`}
+                    >
+                        <span className="material-symbols-outlined">
+                            {saved ? "check_circle" : saving ? "hourglass_top" : "bookmark_add"}
+                        </span>
+                        {saved ? "Saved!" : saving ? "Saving..." : "Save"}
                     </button>
                 </div>
             </div>
