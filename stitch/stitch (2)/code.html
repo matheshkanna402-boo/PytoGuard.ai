@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Botanical Library</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1c2e24",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Custom scrollbar hiding for horizontal scroll areas */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased min-h-screen flex flex-col">
+<!-- Header Section -->
+<div class="sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<!-- Top Title Area -->
+<div class="px-5 pt-12 pb-4 flex justify-between items-center">
+<h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Botanical Library</h1>
+<button class="p-2 rounded-full bg-surface-light dark:bg-surface-dark shadow-sm text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+<!-- Search Bar -->
+<div class="px-5 pb-4">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-11 pr-12 py-3.5 bg-surface-light dark:bg-surface-dark border-none rounded-2xl shadow-sm text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="Search by symptom or plant..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+<button class="p-2 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-3 px-5 pb-4 overflow-x-auto no-scrollbar">
+<button class="flex-none px-5 py-2.5 rounded-full bg-primary text-black font-semibold text-sm shadow-sm shadow-primary/20 transition-transform active:scale-95">
+                All
+            </button>
+<button class="flex-none px-5 py-2.5 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium text-sm hover:border-primary/50 transition-colors active:scale-95">
+                Leaf Spots
+            </button>
+<button class="flex-none px-5 py-2.5 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium text-sm hover:border-primary/50 transition-colors active:scale-95">
+                Wilting
+            </button>
+<button class="flex-none px-5 py-2.5 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium text-sm hover:border-primary/50 transition-colors active:scale-95">
+                Pests
+            </button>
+<button class="flex-none px-5 py-2.5 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium text-sm hover:border-primary/50 transition-colors active:scale-95">
+                Mold
+            </button>
+</div>
+</div>
+<!-- Main Content: Masonry Grid -->
+<main class="flex-1 px-4 py-6 overflow-y-auto pb-24">
+<div class="columns-2 gap-4 space-y-4">
+<!-- Card 1 -->
+<div class="break-inside-avoid relative rounded-2xl overflow-hidden group bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-md rounded-full p-1.5 text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">water_drop</span>
+</div>
+<div class="aspect-[4/5] w-full overflow-hidden">
+<img alt="Monstera leaf with yellow spots close up" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Monstera leaf with yellow bacterial spots close up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP5osqX036egajQ2c_4xabay7qtjhjblDPQW6IvvBPJUOBjC7VwNifE4I3GIWg0lpmqu8Zg0xntQxjou8Xif7y75QRXQAozg3OHLPAX7OEMbEgeitorVKOAY-CSi4hr27Sgn4HX5XjUe25Z49PkXwkYs-JkouiXPSgqjGSWWaIQRoFdD8Z_dt5DJNxQCQjcdkhTPFHeJA_w2w61LMrWTB8NIUpb_SZVj2OMmQTdUVLOLLKMUw7RrzMU7BFKoJmnNHReC_iWgRDCgA"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold text-lg leading-tight mb-1 text-slate-900 dark:text-white">Bacterial Leaf Spot</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400 italic">Xanthomonas campestris</p>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Critical</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="break-inside-avoid relative rounded-2xl overflow-hidden group bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-md rounded-full p-1.5 text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">wb_sunny</span>
+</div>
+<div class="aspect-[3/4] w-full overflow-hidden">
+<img alt="White mealybugs on plant stem macro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Macro shot of white mealybugs clustering on a green stem" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCxD07d-nYiK20pl3ItI-Fu6QKj1MJ_PdhDKqRb-X7QQDeVIjFepM-j8TQQM608mtTT3falVOR_iLbXyO2dHEfuIBoOJSGb3RSt9rYZxg0miYlnFZ4h2ZTrUrrUpYstKZ8LvGzqOLfrsfFqJ1eAIRqUGi54msb9YuNQ_KZF0IczLjLLwqhoYx-78vRDSMC2q5d3ZxN7twpl4MvuDZwagWGZQ7V3n8U7eXINDF3ve0l5nyc_8plW-iENxS2Vfprz6M0HrrTFLXtg-I"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold text-lg leading-tight mb-1 text-slate-900 dark:text-white">Mealybugs</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400 italic">Pseudococcidae</p>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-orange-400"></span>
+<span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">High Risk</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="break-inside-avoid relative rounded-2xl overflow-hidden group bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-md rounded-full p-1.5 text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">ac_unit</span>
+</div>
+<div class="aspect-square w-full overflow-hidden">
+<img alt="Wilted plant leaves drooping" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Green plant leaves drooping and wilting from cold damage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7l8_cNrSbdAceolADe8aM5mg85tAhFX_njc6vFLE8Mw9zBB8gcyNu5GD90QV3RsgDCT3vTyArNTOiVG3bwS-Eu2kWZ91RlSz2-njq5iiIfzPLXQ1Zl98UUL73P-KtCy_XEFAxbZjOpNTb_N0deP6iesw8a_6_FfNkPJNeEZo-Wz9tOJTDoTRVxsauVKLYW_kFhrc66d6s7J8Zoj3cEiOJSvdigplKWO3FVm5vuu2p5yl5NwFR7NW9hz8lzt-wIlOQ03dX76i-P_A"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold text-lg leading-tight mb-1 text-slate-900 dark:text-white">Cold Shock</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400 italic">Physiological</p>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+<span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Moderate</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="break-inside-avoid relative rounded-2xl overflow-hidden group bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-md rounded-full p-1.5 text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">humidity_high</span>
+</div>
+<div class="aspect-[3/5] w-full overflow-hidden">
+<img alt="Powdery mildew on leaf surface" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up of white powdery mildew covering a green leaf" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIAn6YwFVjmC1R6aU4YKCOn4qtjAcWR8d6bdEKosccdWNK3MjsfJzNXbVUcEqQIlTMtIFjQpP-orhIPSNFQi2XUhZk7qaBMQY7sam9uhyE37zYhC6w-q7ve2cGsmY6TT5OvB2qoks2BEQdMilV7MuKeGyTuuYEykf-8LjSRgCGSQprFlVuqpSQT-I2Y545rhW156NjrGNxEsjHLHbLVKwccnGHE4G5NRKfTyLkW2yVbcOshGW3XDl6wKcaTaMnwFLc-mcdcjctDcQ"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold text-lg leading-tight mb-1 text-slate-900 dark:text-white">Powdery Mildew</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400 italic">Erysiphales</p>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+<span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Common</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="break-inside-avoid relative rounded-2xl overflow-hidden group bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-md rounded-full p-1.5 text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">bug_report</span>
+</div>
+<div class="aspect-square w-full overflow-hidden">
+<img alt="Spider mite webs on plant" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Tiny spider mite webs visible on the underside of a leaf" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVGWAV-qz5Svv1x6y9sZdaMEG2MBhLUADrOuZhDpLjndyracZ7i17zZi-pIpi9wHPplgb1WNkd32ItAcLtPIKMLydYA9gi345RvYF0DeJpgv9vz3Tc3WaAENh-SAM2VDzzltJ8deRWga4EVR5qylQOFxDpgDEyv6KJ4WQaT227x6txQzoIqnKQxc_F3grlYxwrCZ5IbnjjWWEM0nXt90u5Vb3xSfhnH8pvq8YS2bEs-7PocXv9ale7JugUDWOKJ5vum1naIqeMHHk"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold text-lg leading-tight mb-1 text-slate-900 dark:text-white">Spider Mites</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400 italic">Tetranychidae</p>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Severe</span>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="break-inside-avoid relative rounded-2xl overflow-hidden group bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-md rounded-full p-1.5 text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">eco</span>
+</div>
+<div class="aspect-[4/3] w-full overflow-hidden">
+<img alt="Root rot damage on plant roots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Plant roots showing signs of brown rot and decay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJxrTOxMKEkKJbJAG1k27NIgvf8kBUQ4dQ-uJ_9QvbcrFD5tIoQz7dnN_0DIInULX5dDqHNiEQBOqkjokH-EutyCY8mFW-SSLuLQdyyyIbNT1PZpq2NVRx5kab7tE7rYwcaRoI3llshd8v13UpkCNXqQP6z3H5ZIa-E-TJZXHck2LiOpDCSulRyzsRTBRR8abPbQ3ZhjVlInDSdO78i464dxSzPJzJP5uQo8tWF8LXa9IoA-45dy502-oIemFHfupLqijykA1hNEs"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold text-lg leading-tight mb-1 text-slate-900 dark:text-white">Root Rot</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400 italic">Pythium spp.</p>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Fatal</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 border-t border-slate-200 dark:border-slate-800 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-lg pb-safe pt-2 px-4 z-50">
+<div class="flex items-center justify-around pb-5 pt-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 group" href="#">
+<div class="text-slate-400 group-hover:text-primary transition-colors flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">home</span>
+</div>
+<p class="text-slate-400 group-hover:text-primary transition-colors text-[10px] font-medium tracking-wide">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 group relative -top-5" href="#">
+<div class="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/40 group-hover:scale-105 transition-transform border-4 border-background-light dark:border-background-dark">
+<span class="material-symbols-outlined text-black text-3xl">qr_code_scanner</span>
+</div>
+<p class="text-slate-900 dark:text-white text-[10px] font-bold tracking-wide">Scanner</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 group" href="#">
+<div class="text-primary flex h-8 items-center justify-center">
+<span class="material-symbols-outlined fill-current">local_library</span>
+</div>
+<p class="text-primary text-[10px] font-medium tracking-wide">Library</p>
+</a>
+</div>
+</nav>
+<!-- Safe area padding for bottom nav -->
+<div class="h-24"></div>
+</body></html>

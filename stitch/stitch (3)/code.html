@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Botanical AI Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#36cf17",
+              "background-light": "#f6f8f6",
+              "background-dark": "#142111", // Deep forest green/black as requested in system prompt
+              "surface-dark": "#1c2e18", // Slightly lighter for cards
+              "sage": "#8da38d",
+              "terracotta": "#c76a52",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              "DEFAULT": "0.375rem", 
+              "lg": "0.5rem", 
+              "xl": "0.75rem", 
+              "2xl": "1rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom scrollbar for horizontal scrolling */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-gray-100 min-h-screen flex flex-col overflow-x-hidden transition-colors duration-200">
+<!-- Sticky Header -->
+<header class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-200 dark:border-white/10 px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="p-2 -ml-2 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-gray-800 dark:text-white">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">
+<span class="material-symbols-outlined text-[20px]">eco</span>
+</div>
+<h1 class="text-lg font-bold tracking-tight dark:text-white">Botanical AI</h1>
+</div>
+</div>
+<button class="relative w-10 h-10 rounded-full overflow-hidden border-2 border-primary/30">
+<img alt="Admin User Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a smiling man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACPQFJJ39gzSd1f7eHFewva7JMebfXpvVNxCKbOuESFaN75X4EBGP1T1DNdy4ocR9qvnsaQF_svjRIxMPJKOa0LsH_SNTJnboVWSCezY5yskRKJ-pmkJp_7TylGGDpTaYcNeVGWw32FVrrNWTLQrEtmQdLoJnNk2-r_3o908c0FJdy60k6ojCuyQCzinuk1bOPwC3MF5qCOHIjHQghx_avU1nv9yOtQRG7HAQfPUfE22ZLltT4BDYUOUQf4YnYYG2Z6FOzQzjFleA"/>
+</button>
+</header>
+<main class="flex-1 flex flex-col gap-6 p-4 pb-20">
+<!-- Welcome & Date -->
+<div class="flex flex-col gap-1">
+<p class="text-sm font-medium text-sage dark:text-sage">Oct 24, 2023</p>
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white">Dashboard Overview</h2>
+</div>
+<!-- Metrics Scrollable Row -->
+<div class="flex overflow-x-auto gap-4 pb-2 hide-scrollbar -mx-4 px-4 snap-x">
+<!-- Metric 1: Total Scans -->
+<div class="snap-start min-w-[240px] flex-1 bg-white dark:bg-surface-dark rounded-xl p-5 border border-gray-100 dark:border-white/5 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">qr_code_scanner</span>
+</div>
+<div class="flex flex-col gap-3 relative z-10">
+<div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined text-[20px]">center_focus_weak</span>
+<span class="text-sm font-medium uppercase tracking-wider">Total Scans</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-bold text-gray-900 dark:text-white">124,592</span>
+</div>
+<div class="flex items-center gap-1 text-sm text-primary font-medium">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+12% this week</span>
+</div>
+</div>
+</div>
+<!-- Metric 2: New Diseases -->
+<div class="snap-start min-w-[240px] flex-1 bg-white dark:bg-surface-dark rounded-xl p-5 border border-gray-100 dark:border-white/5 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-terracotta">coronavirus</span>
+</div>
+<div class="flex flex-col gap-3 relative z-10">
+<div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined text-[20px]">pest_control</span>
+<span class="text-sm font-medium uppercase tracking-wider">New Diseases</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-bold text-gray-900 dark:text-white">3</span>
+</div>
+<div class="flex items-center gap-1 text-sm text-terracotta font-medium">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+<span>Requires Review</span>
+</div>
+</div>
+</div>
+<!-- Metric 3: Active Users -->
+<div class="snap-start min-w-[240px] flex-1 bg-white dark:bg-surface-dark rounded-xl p-5 border border-gray-100 dark:border-white/5 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-sage">group</span>
+</div>
+<div class="flex flex-col gap-3 relative z-10">
+<div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-sm font-medium uppercase tracking-wider">Active Users</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-bold text-gray-900 dark:text-white">8,400</span>
+</div>
+<div class="flex items-center gap-1 text-sm text-sage dark:text-sage font-medium">
+<span class="material-symbols-outlined text-[16px]">trending_flat</span>
+<span>Stable</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Chart Section -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-5 border border-gray-100 dark:border-white/5 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Model Accuracy</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Last 30 Days Performance</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-2xl font-bold text-primary">96.4%</span>
+<span class="flex items-center justify-center w-6 h-6 rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+</span>
+</div>
+</div>
+<!-- Custom CSS Chart -->
+<div class="relative h-48 w-full">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between text-xs text-gray-400 dark:text-gray-600">
+<div class="border-b border-dashed border-gray-200 dark:border-white/10 w-full h-0"></div>
+<div class="border-b border-dashed border-gray-200 dark:border-white/10 w-full h-0"></div>
+<div class="border-b border-dashed border-gray-200 dark:border-white/10 w-full h-0"></div>
+<div class="border-b border-dashed border-gray-200 dark:border-white/10 w-full h-0"></div>
+</div>
+<!-- SVG Chart -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 50">
+<!-- Gradient Defs -->
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#36cf17" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#36cf17" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Area Path -->
+<path d="M0,50 L0,35 L10,32 L20,38 L30,25 L40,28 L50,15 L60,18 L70,10 L80,12 L90,5 L100,8 L100,50 Z" fill="url(#chartGradient)"></path>
+<!-- Line Path -->
+<path d="M0,35 L10,32 L20,38 L30,25 L40,28 L50,15 L60,18 L70,10 L80,12 L90,5 L100,8" fill="none" stroke="#36cf17" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+</svg>
+<!-- Tooltip Overlay (Static for visual) -->
+<div class="absolute top-[10%] left-[70%] transform -translate-x-1/2 -translate-y-full mb-2">
+<div class="bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs py-1 px-2 rounded shadow-lg whitespace-nowrap">
+                        High: 98.2%
+                    </div>
+<div class="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[4px] border-t-gray-900 dark:border-t-white mx-auto"></div>
+</div>
+<div class="absolute top-[18%] left-[70%] w-3 h-3 bg-primary border-2 border-white dark:border-background-dark rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-sm"></div>
+</div>
+<div class="flex justify-between mt-2 text-xs text-gray-400 dark:text-gray-500 font-medium px-1">
+<span>Week 1</span>
+<span>Week 2</span>
+<span>Week 3</span>
+<span>Week 4</span>
+</div>
+</div>
+<!-- Pending Verifications -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-1">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Pending Verifications</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-terracotta/20 text-terracotta text-xs font-bold">12 Pending</span>
+</div>
+<!-- List Item 1 -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-4 border border-gray-100 dark:border-white/5 shadow-sm flex flex-col gap-4">
+<div class="flex gap-4">
+<div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
+<img alt="Diseased Tomato Leaf" class="w-full h-full object-cover" data-alt="Close up of a tomato leaf with brown spots" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA47RCK11AWL0vV_nvV8po8XSmst3GFdtXz4WQoyNqgC57Lf8YbJEjpnwO0e8RGZ9hnegTEqXRnlbqxKfKtBdrONbH_adgHHcXYvzpdgTMKRjkreBeeCwQcww2sMJb-FuH3U_Bg1o6woDFSZ6KOigZ_8c4KZCE1ywJXqu9NItVlvoSseyLWF76MU6kS8_wFR2qsPgJ5fy8RREbgkF9DYUViRbKttGCp7Jvv_a6hD0PGTO5pMoY7cJnVbio9-PXJudCD2NuHBDtXI_w"/>
+<div class="absolute top-1 right-1 w-2.5 h-2.5 bg-yellow-400 rounded-full border border-white dark:border-gray-800"></div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-gray-900 dark:text-white">Tomato Leaf</h4>
+<p class="text-sm text-terracotta font-medium">Potential Late Blight</p>
+</div>
+<span class="text-xs font-mono bg-gray-100 dark:bg-white/5 px-2 py-1 rounded text-gray-500 dark:text-gray-400">ID: #8392</span>
+</div>
+<div class="mt-2 w-full bg-gray-200 dark:bg-white/10 rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 98%"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="text-[10px] uppercase tracking-wider text-gray-400">AI Confidence</span>
+<span class="text-xs font-bold text-primary">98%</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-white/5 transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]">close</span>
+                        Reject
+                    </button>
+<button class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-primary text-white font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 text-sm">
+<span class="material-symbols-outlined text-[18px]">check</span>
+                        Confirm
+                    </button>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-4 border border-gray-100 dark:border-white/5 shadow-sm flex flex-col gap-4">
+<div class="flex gap-4">
+<div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
+<img alt="Rose Leaf" class="w-full h-full object-cover" data-alt="Rose leaves with black spots fungus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTSX2pntyyposXH15HMAg357HMGz1IuxRFP2Str0crlb-n236n3HCHAf95Cgw8F8pDmw5hWBeYfykbRtG8k7OQ15DRFVyfCISMCfhyk22vgGiMFxQgxxBWZeeDB-8QxNOwPw6HIq-zww-kcQT6jIZNSTuwXxfsR0Ms159xa4n7gLBc1sLMhCRMJ0jZHGMxuQSQMP-0DZpH-8V4asb1sBH2Ug62EFRs6kqVqEy93oqpDD7rxVq88zdp2u_Bvz6N4RWdUO6xCaoUVRw"/>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-gray-900 dark:text-white">Rose Bush</h4>
+<p class="text-sm text-terracotta font-medium">Black Spot Fungus</p>
+</div>
+<span class="text-xs font-mono bg-gray-100 dark:bg-white/5 px-2 py-1 rounded text-gray-500 dark:text-gray-400">ID: #8391</span>
+</div>
+<div class="mt-2 w-full bg-gray-200 dark:bg-white/10 rounded-full h-1.5">
+<div class="bg-yellow-500 h-1.5 rounded-full" style="width: 85%"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="text-[10px] uppercase tracking-wider text-gray-400">AI Confidence</span>
+<span class="text-xs font-bold text-yellow-500">85%</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-white/5 transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]">close</span>
+                        Reject
+                    </button>
+<button class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-primary text-white font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 text-sm">
+<span class="material-symbols-outlined text-[18px]">check</span>
+                        Confirm
+                    </button>
+</div>
+</div>
+<!-- View All Button -->
+<button class="w-full py-3 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors">
+                View All Pending Verifications
+            </button>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-xl shadow-primary/30 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Sidebar Drawer (Hidden by default, visual representation of structure) -->
+<!-- Note: Functionality not implemented as per "No JS" rule, but structure is here if needed to be toggled via CSS or future JS -->
+<div class="hidden fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm">
+<div class="w-3/4 h-full bg-background-light dark:bg-background-dark p-6 shadow-2xl flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold dark:text-white">Menu</h2>
+<button class="p-2"><span class="material-symbols-outlined dark:text-white">close</span></button>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 p-3 rounded-lg bg-primary/10 text-primary font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-gray-600 dark:text-gray-300 font-medium hover:bg-gray-100 dark:hover:bg-white/5" href="#">
+<span class="material-symbols-outlined">manage_accounts</span>
+                    User Management
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-gray-600 dark:text-gray-300 font-medium hover:bg-gray-100 dark:hover:bg-white/5" href="#">
+<span class="material-symbols-outlined">dataset</span>
+                    Disease Database
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-gray-600 dark:text-gray-300 font-medium hover:bg-gray-100 dark:hover:bg-white/5" href="#">
+<span class="material-symbols-outlined">monitor_heart</span>
+                    System Health
+                </a>
+</nav>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Feedback Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#36cf17",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#142111",
+                        "surface-dark": "#1c2e18",
+                        "surface-light": "#253b20",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white antialiased overflow-x-hidden">
+<div class="relative flex min-h-screen flex-col w-full max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-2xl overflow-hidden">
+<!-- Header -->
+<header class="flex items-center justify-between px-5 py-4 pt-6 bg-background-light dark:bg-background-dark sticky top-0 z-10 border-b border-white/5">
+<div class="flex flex-col">
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Feedback Hub</h1>
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400">Admin Dashboard</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="relative p-2 rounded-full hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-white">notifications</span>
+<span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-primary border border-background-dark"></span>
+</button>
+<div class="h-9 w-9 rounded-full bg-gradient-to-br from-primary to-emerald-700 p-[2px]">
+<div class="h-full w-full rounded-full bg-surface-dark flex items-center justify-center overflow-hidden">
+<img alt="Admin user profile avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPm8wiKyHA6gM0v3eypmOICKqS3UiB4B1BeeY_Ggq0X6NrwSTnLB1UVSEUAXx3fJm8HyCIgWAxgcihHACeJK2PE20IeOIJU9Jj9kiSJklIYVswKBapaok1xx86Yy-wojwnvtkVWKsSailydHjVF8qRj2FqhUxN_HQvOzfe4IfDUBaf0NnMfzZyCQ3rtKMCDOlrBRGW5TgD4GxDdrE1TO-kXQ8_LbVPoGOZpLUozKGwc0BF-OfXGNLJq2RnJnwyNLMikAuVG2XECTY"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pb-24 px-4 pt-4 space-y-6">
+<!-- System Health Widget -->
+<section>
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">System Health</h2>
+<span class="flex items-center gap-1 text-[10px] font-medium text-primary bg-primary/10 px-2 py-1 rounded-full">
+<span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+                        LIVE
+                    </span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Metric Card 1 -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-4 border border-slate-200 dark:border-white/5 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">speed</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium mb-1">Avg Response</p>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">240</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">ms</span>
+</div>
+<div class="mt-2 flex items-center text-[10px] font-medium text-emerald-500">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+<span class="ml-0.5">-12% vs last week</span>
+</div>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-4 border border-slate-200 dark:border-white/5 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">check_circle</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium mb-1">Scan Success</p>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">98.4</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">%</span>
+</div>
+<div class="mt-2 flex items-center text-[10px] font-medium text-emerald-500">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="ml-0.5">+2.1% stable</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Reported Inaccuracies Section -->
+<section>
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Reported Inaccuracies <span class="ml-1 text-xs bg-red-500/20 text-red-500 px-1.5 py-0.5 rounded-full">5</span></h2>
+<button class="text-xs font-medium text-primary hover:text-primary/80">View All</button>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1 -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-3 border border-slate-200 dark:border-white/5 shadow-sm flex gap-3">
+<div class="w-20 h-20 shrink-0 rounded-lg bg-slate-800 overflow-hidden relative">
+<img alt="Diseased leaf" class="w-full h-full object-cover opacity-90" data-alt="Close up of a diseased tomato leaf with yellow spots" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIxn-9sTghy9ffleKtIDXrZS5yyNKvflnwBFSy_PuD7IqjRfNrVBnqUv_2Ij4cyNT2W88Kqx2qSXi08yTCKrVgCuCSv1Ilh_b0nwz7_XY3G3fOznk3-e93hwFCuOb2meLw-9raGqv1JWs5xJr5z5z2eRgVrQVfCf-K0XJt7Xb7-S3mJKBZqZcVhq6dWBrlY99GQDsxhjaK3NjW4nP_tTj_nBmW8xaIjbXepLWCxso_FFWuCWk_DvqsBz5rrW0X9GL17Ble9PZg01M"/>
+<div class="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm p-0.5 text-center">
+<span class="text-[9px] font-bold text-white uppercase tracking-wider">09:41 AM</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-sm font-bold text-slate-900 dark:text-white leading-tight mb-1">Tomato Early Blight</h3>
+<div class="flex flex-wrap gap-y-1 text-xs">
+<p class="text-slate-500 dark:text-slate-400 w-full"><span class="font-medium text-primary">AI:</span> 85% Confidence</p>
+<p class="text-slate-500 dark:text-slate-400 w-full"><span class="font-medium text-red-400">User:</span> Nutrient Deficiency</p>
+</div>
+</div>
+<div class="flex gap-2 mt-2 justify-end">
+<button class="px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">Dismiss</button>
+<button class="flex-1 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wide text-black bg-primary hover:bg-green-400 transition-colors shadow-[0_0_10px_rgba(54,207,23,0.3)]">Correct Model</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-3 border border-slate-200 dark:border-white/5 shadow-sm flex gap-3">
+<div class="w-20 h-20 shrink-0 rounded-lg bg-slate-800 overflow-hidden relative">
+<img alt="Monstera leaf" class="w-full h-full object-cover opacity-90" data-alt="Monstera leaf with brown edges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD_zSd_zOCz9Nv2q_vLr7ssP0k2UCesP2LQSkN5EOG6_2Hxds0NHV76bzuRFt2C8l8Mm-EXP4IRxPpCxhzoadTOyOkKHYvI5jsoimTtZ9DrsENZi6bQitUXKUHEtn1e5h9-2WdNX-_uulFnK0vsGBIS6kekM8UEH_WORvAfjnfC3dQADnR1Fck0Dxm_5eihNE9OxcxAPJp-zCxtHTaWKNZ5rWVUvkQX-v_S74dGWKZNLZleIXQP2-MEm-O6L9QaG3NsQZTlp-88Io"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-sm font-bold text-slate-900 dark:text-white leading-tight mb-1">Monstera Rust</h3>
+<div class="flex flex-wrap gap-y-1 text-xs">
+<p class="text-slate-500 dark:text-slate-400 w-full"><span class="font-medium text-primary">AI:</span> 92% Confidence</p>
+<p class="text-slate-500 dark:text-slate-400 w-full"><span class="font-medium text-red-400">User:</span> Sunburn</p>
+</div>
+</div>
+<div class="flex gap-2 mt-2 justify-end">
+<button class="px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">Dismiss</button>
+<button class="flex-1 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wide text-black bg-primary hover:bg-green-400 transition-colors shadow-[0_0_10px_rgba(54,207,23,0.3)]">Correct Model</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Requests Section -->
+<section>
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Community Wishlist</h2>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-white/5 px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px]">sort</span>
+<span>Top Voted</span>
+</div>
+</div>
+<div class="space-y-2">
+<!-- Feature 1 -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-4 border border-slate-200 dark:border-white/5 shadow-sm flex items-center gap-4">
+<div class="flex flex-col items-center justify-center bg-slate-100 dark:bg-surface-light h-12 w-12 rounded-lg shrink-0 border border-slate-200 dark:border-white/5">
+<span class="material-symbols-outlined text-primary text-lg">keyboard_arrow_up</span>
+<span class="text-xs font-bold text-slate-900 dark:text-white -mt-1">432</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-0.5">
+<h3 class="text-sm font-bold text-slate-900 dark:text-white truncate">Offline Mode for field use</h3>
+<span class="bg-amber-500/10 text-amber-500 text-[9px] font-bold uppercase px-1.5 py-0.5 rounded">Planned</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">Users want to scan plants without internet connection.</p>
+</div>
+<button class="text-slate-400 hover:text-white">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Feature 2 -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-4 border border-slate-200 dark:border-white/5 shadow-sm flex items-center gap-4">
+<div class="flex flex-col items-center justify-center bg-slate-100 dark:bg-surface-light h-12 w-12 rounded-lg shrink-0 border border-slate-200 dark:border-white/5">
+<span class="material-symbols-outlined text-slate-400 text-lg">keyboard_arrow_up</span>
+<span class="text-xs font-bold text-slate-900 dark:text-white -mt-1">215</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-0.5">
+<h3 class="text-sm font-bold text-slate-900 dark:text-white truncate">Export PDF Reports</h3>
+<span class="bg-purple-500/10 text-purple-400 text-[9px] font-bold uppercase px-1.5 py-0.5 rounded">Review</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">Professional gardeners need printable reports.</p>
+</div>
+<button class="text-slate-400 hover:text-white">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Feature 3 -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-4 border border-slate-200 dark:border-white/5 shadow-sm flex items-center gap-4 opacity-75">
+<div class="flex flex-col items-center justify-center bg-slate-100 dark:bg-surface-light h-12 w-12 rounded-lg shrink-0 border border-slate-200 dark:border-white/5">
+<span class="material-symbols-outlined text-slate-400 text-lg">keyboard_arrow_up</span>
+<span class="text-xs font-bold text-slate-900 dark:text-white -mt-1">89</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-0.5">
+<h3 class="text-sm font-bold text-slate-900 dark:text-white truncate">Dark Mode Toggle</h3>
+<span class="bg-slate-500/10 text-slate-400 text-[9px] font-bold uppercase px-1.5 py-0.5 rounded">Backlog</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">Manual override for system theme settings.</p>
+</div>
+<button class="text-slate-400 hover:text-white">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Navigation -->
+<nav class="absolute bottom-0 left-0 w-full border-t border-slate-200 dark:border-white/5 bg-white dark:bg-surface-dark/95 backdrop-blur-lg px-6 pb-6 pt-3 z-50">
+<div class="flex items-center justify-between">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<p class="text-[10px] font-semibold leading-normal tracking-wide">Hub</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 hover:text-slate-200 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">group</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Users</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 hover:text-slate-200 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">analytics</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Data</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 hover:text-slate-200 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Settings</p>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

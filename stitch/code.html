@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Field Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "leaf-dark": "#0d1b12",
+                        "leaf-medium": "#1f4a2c",
+                        "leaf-light": "#cfe7d7",
+                        "sage": "#e7f3eb",
+                        "danger": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    backgroundImage: {
+                        'vein-pattern': "url('data:image/svg+xml,%3Csvg width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cpath d=\\'M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\\' fill=\\'%2313ec5b\\' fill-opacity=\\'0.07\\' fill-rule=\\'evenodd\\'/%3E%3C/svg%3E')",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(246, 248, 246, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .glass-nav {
+            background: rgba(246, 248, 246, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .shutter-glow {
+            box-shadow: 0 0 20px rgba(19, 236, 91, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 20px rgba(19, 236, 91, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 35px rgba(19, 236, 91, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(19, 236, 91, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.5); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-leaf-dark min-h-screen relative overflow-hidden">
+<!-- Subtle Background Texture -->
+<div class="absolute inset-0 z-0 bg-vein-pattern pointer-events-none opacity-100 mix-blend-multiply"></div>
+<!-- Main Container -->
+<div class="relative z-10 flex flex-col h-screen max-w-md mx-auto bg-white/30 shadow-2xl overflow-hidden sm:border-x sm:border-sage">
+<!-- Header Section -->
+<header class="pt-12 px-6 pb-4 flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<p class="text-leaf-medium font-medium tracking-wide text-sm uppercase">Field Dashboard</p>
+<h1 class="text-3xl font-bold tracking-tight text-leaf-dark">Good Morning,<br/>Gardener</h1>
+</div>
+<div class="h-12 w-12 rounded-full bg-leaf-light flex items-center justify-center border border-white/50 shadow-sm overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="User profile portrait of a gardener" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTVWc0G-s7NJiVh-ToNF5vkBE8RYF3xJ0wYxD8TzVjOE_jyvLnCmtxn_e_mvOBBUNNdjnzfw0ft-0q6MoZP7eF6NsnbbbJRqk0MmtIL0DLGCNrCNvjeTwzuwiR9KPJcVN_sWNB7Y9Nc0dF8eNVr38aGCCKkQn42iWU75JevE0oK70N_LrJvoHb-nkCmjVDQ3_RlMDUtp1IQB2JASx31l0aMcuZ7rumllyyxCQ4_jxZldcapxAN5pNFtE4vEk5ll4i5ISnxS2hU4Cc"/>
+</div>
+</header>
+<!-- Weather Alert Card -->
+<div class="px-6 mb-8">
+<div class="glass-panel p-5 rounded-xl shadow-sm border-l-4 border-l-primary relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl">humidity_high</span>
+</div>
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-primary/20 text-leaf-dark p-1.5 rounded-full">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</span>
+<h2 class="font-bold text-lg text-leaf-dark">High Fungal Risk</h2>
+</div>
+<p class="text-leaf-medium text-sm mb-4 max-w-[85%] font-medium">
+                    Humidity is at 90%. Avoid overhead watering to prevent spore spread.
+                </p>
+<div class="flex gap-3">
+<div class="flex items-center gap-1.5 bg-white/60 px-3 py-1.5 rounded-full text-xs font-bold text-leaf-dark border border-white">
+<span class="material-symbols-outlined text-[16px]">thermostat</span>
+<span>72°F</span>
+</div>
+<div class="flex items-center gap-1.5 bg-white/60 px-3 py-1.5 rounded-full text-xs font-bold text-leaf-dark border border-white">
+<span class="material-symbols-outlined text-[16px]">water_drop</span>
+<span>90%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Scrollable Content Area -->
+<main class="flex-1 overflow-y-auto no-scrollbar pb-32">
+<!-- Recent Diagnostics Section -->
+<div class="px-6 mb-2">
+<div class="flex justify-between items-end mb-4">
+<h2 class="text-xl font-bold text-leaf-dark">Recent Diagnostics</h2>
+<a class="text-primary font-bold text-sm hover:underline" href="#">View All</a>
+</div>
+<!-- Horizontal Scroll Container -->
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-4 -mx-6 px-6 snap-x">
+<!-- Card 1: Danger -->
+<div class="snap-center shrink-0 w-[240px] bg-white rounded-xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-sage relative">
+<div class="absolute top-3 right-3 z-10">
+<span class="flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-danger opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-danger border-2 border-white"></span>
+</span>
+</div>
+<div class="h-32 w-full rounded-lg bg-gray-100 mb-3 overflow-hidden relative">
+<img alt="Tomato leaves" class="w-full h-full object-cover" data-alt="Close up of tomato leaves showing signs of blight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx-XuttUDtUwZ-eKhTAhd3eQ-33IpZaFjfv4aOO6gxfTS2Z_04O0dMKaZEsRentaGiohXl386wJp0mKTp0GFD6K2RR8vNvvCOf21XjmvFYx2-NryzlejHLrZrxutBAajYSUIVJhs_vpvLb3aeN232MNmy5zg1zbF94JdmRIbsQ0sgoxltHPOKdCsjNPvnGpiueZUyUt6AhNFoR4HvjkUwa1odo2biw-HxzHzVmDyjQt-Xj6GLemr6PyRPjn5Hyw1RnBwlcgBhUQso"/>
+<div class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full">
+                                 2h ago
+                             </div>
+</div>
+<h3 class="font-bold text-leaf-dark">Tomato</h3>
+<p class="text-sm text-danger font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">bug_report</span>
+                            Early Blight
+                        </p>
+</div>
+<!-- Card 2: Healthy -->
+<div class="snap-center shrink-0 w-[240px] bg-white rounded-xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-sage relative">
+<div class="absolute top-3 right-3 z-10">
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary border-2 border-white"></span>
+</div>
+<div class="h-32 w-full rounded-lg bg-gray-100 mb-3 overflow-hidden relative">
+<img alt="Monstera leaf" class="w-full h-full object-cover" data-alt="Healthy vibrant green monstera leaf" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbH85n_YFO7o3W8bewcIMtcGOhUW3GHGUZkSqRjcmkHtvITeKwTNWpLO2cu18asYFM75vDss52m5f5jxq5PsFELbHhIN8BOcG3D7oTOATOlUchMEhfRQXFzmAbSHoYSDRvPCNYws9hfmGZlAsBS_kPOyfeG9DUnW6_-lTJ7QQ5XxvAKJMQo6Usq5iO1QsRJmjNJfsqS8R9KkLpyUwegTp_UtjoDJcEMHWGbH_5x8-iloUKCNFMeGE4IW_lytBEb32-7JayZzOoFSE"/>
+<div class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full">
+                                 5h ago
+                             </div>
+</div>
+<h3 class="font-bold text-leaf-dark">Monstera</h3>
+<p class="text-sm text-leaf-medium font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                            Healthy
+                        </p>
+</div>
+<!-- Card 3: Danger -->
+<div class="snap-center shrink-0 w-[240px] bg-white rounded-xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-sage relative">
+<div class="absolute top-3 right-3 z-10">
+<span class="flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-danger opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-danger border-2 border-white"></span>
+</span>
+</div>
+<div class="h-32 w-full rounded-lg bg-gray-100 mb-3 overflow-hidden relative">
+<img alt="Rose leaves" class="w-full h-full object-cover" data-alt="Rose leaves with white powdery spots" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlYV0I6N9SKm2kWhDXjqRQtiPO_e1vkGbuu4Vu5rQILJNZcWZW9dgzVRPXbhx4k_TeqPzcdBSdVZBj4K5WwDg-cmXZIXSMlCZ6zvZgjlQ2dUhe63xMkFore6R6WJk0-h52vU9VuRDmEYcATIoKTm1YVxKW5TjFYDrqH5zpaw9bdB8AmMM7aIjEhEx9ohWp43aymY2DW5pmdQ0qPJoK5QHDB13nckA6xO0HoWjNbaircNhq22mIlD7eiUSTTzroG8KB14Rmq_Lzsm0"/>
+<div class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full">
+                                 Yesterday
+                             </div>
+</div>
+<h3 class="font-bold text-leaf-dark">English Rose</h3>
+<p class="text-sm text-danger font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">coronavirus</span>
+                            Powdery Mildew
+                        </p>
+</div>
+</div>
+</div>
+<!-- Quick Tips Section -->
+<div class="px-6 mt-4">
+<h2 class="text-xl font-bold text-leaf-dark mb-4">Garden Tasks</h2>
+<div class="flex flex-col gap-3">
+<div class="flex items-center p-4 bg-white rounded-xl border border-sage shadow-sm">
+<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 mr-4">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-leaf-dark">Water Hydrangeas</h4>
+<p class="text-xs text-leaf-medium">Ideally before 10 AM today.</p>
+</div>
+<button class="h-8 w-8 rounded-full border border-sage flex items-center justify-center text-leaf-medium hover:bg-sage">
+<span class="material-symbols-outlined text-lg">check</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom spacer for FAB -->
+<div class="h-24"></div>
+</main>
+<!-- Bottom Navigation & FAB -->
+<div class="absolute bottom-0 w-full z-50">
+<!-- FAB Container -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+<button class="group relative flex h-20 w-20 items-center justify-center rounded-full bg-leaf-dark text-primary shutter-glow transition-transform active:scale-95">
+<!-- Shutter Rings SVG -->
+<svg class="absolute inset-0 h-full w-full animate-[spin_10s_linear_infinite] opacity-30" fill="none" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<circle cx="50" cy="50" r="48" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1"></circle>
+<circle cx="50" cy="50" r="38" stroke="currentColor" stroke-dasharray="10 10" stroke-width="1"></circle>
+</svg>
+<!-- Icon -->
+<span class="material-symbols-outlined text-4xl relative z-10 transition-transform group-hover:scale-110" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 48;">
+                        camera
+                    </span>
+<span class="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-leaf-dark">
+<span class="material-symbols-outlined text-sm font-bold">eco</span>
+</span>
+</button>
+</div>
+<!-- Glass Navbar -->
+<nav class="glass-nav flex h-20 w-full items-end justify-between px-8 pb-3 relative z-10">
+<!-- Left Group -->
+<div class="flex gap-8 w-1/3 justify-start">
+<a class="flex flex-col items-center gap-1 group/nav" href="#">
+<span class="material-symbols-outlined text-leaf-medium group-hover/nav:text-primary transition-colors text-[28px]">local_library</span>
+<span class="text-[10px] font-bold text-leaf-medium group-hover/nav:text-primary transition-colors">Library</span>
+</a>
+<a class="flex flex-col items-center gap-1 group/nav" href="#">
+<span class="material-symbols-outlined text-leaf-medium group-hover/nav:text-primary transition-colors text-[28px]">forum</span>
+<span class="text-[10px] font-bold text-leaf-medium group-hover/nav:text-primary transition-colors">Community</span>
+</a>
+</div>
+<!-- Spacer for FAB -->
+<div class="w-1/3"></div>
+<!-- Right Group -->
+<div class="flex gap-8 w-1/3 justify-end">
+<a class="flex flex-col items-center gap-1 group/nav" href="#">
+<span class="material-symbols-outlined text-leaf-medium group-hover/nav:text-primary transition-colors text-[28px]">bar_chart</span>
+<span class="text-[10px] font-bold text-leaf-medium group-hover/nav:text-primary transition-colors">Stats</span>
+</a>
+<a class="flex flex-col items-center gap-1 group/nav" href="#">
+<span class="material-symbols-outlined text-leaf-medium group-hover/nav:text-primary transition-colors text-[28px]">account_circle</span>
+<span class="text-[10px] font-bold text-leaf-medium group-hover/nav:text-primary transition-colors">Profile</span>
+</a>
+</div>
+</nav>
+<!-- Curved Cutout visual trick for the nav bar using SVG or CSS mask could be done here, but standard overlay is cleaner for this complexity -->
+</div>
+</div>
+</body></html>
