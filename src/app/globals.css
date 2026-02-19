@@ -43,14 +43,28 @@
 }
 
 @keyframes pulse-glow {
-  0% { box-shadow: 0 0 20px rgba(19, 236, 91, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.5); }
-  50% { box-shadow: 0 0 35px rgba(19, 236, 91, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.8); }
-  100% { box-shadow: 0 0 20px rgba(19, 236, 91, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.5); }
+  0% {
+    box-shadow: 0 0 20px rgba(19, 236, 91, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(19, 236, 91, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+
+  100% {
+    box-shadow: 0 0 20px rgba(19, 236, 91, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.5);
+  }
 }
 
 /* Hidden Scrollbar */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 /* Vein Pattern Background */
 .bg-vein-pattern {
@@ -67,4 +81,17 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* PWA Install Banner animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
