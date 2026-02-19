@@ -144,7 +144,7 @@ export default function ScannerPage() {
     };
 
     return (
-        <div className="fixed inset-0 z-40 bg-black text-white font-display flex flex-col overflow-hidden">
+        <div className="fixed inset-0 z-40 bg-black text-white font-display flex flex-col overflow-hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
             {/* Live Camera Feed / Captured Image */}
             <div className="absolute inset-0">
                 {/* Live Video (hidden when image is captured) */}
@@ -173,14 +173,14 @@ export default function ScannerPage() {
             </div>
 
             {/* Top Bar */}
-            <div className="relative z-10 flex items-center justify-between px-4 pt-12 pb-4">
+            <div className="relative z-10 flex items-center justify-between px-4 pt-14 pb-2 shrink-0">
                 <button onClick={() => { stopCamera(); router.back(); }} className="p-2 rounded-full bg-white/10 backdrop-blur-sm">
                     <span className="material-symbols-outlined">close</span>
                 </button>
                 <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-primary/30">
                     <span className={`w-2 h-2 rounded-full ${isScanning ? "bg-primary animate-pulse" :
-                            image ? "bg-yellow-400" :
-                                cameraActive ? "bg-primary" : "bg-red-400"
+                        image ? "bg-yellow-400" :
+                            cameraActive ? "bg-primary" : "bg-red-400"
                         }`} />
                     <span className={`text-xs font-bold uppercase tracking-wider ${isScanning ? "text-primary" : "text-white/70"
                         }`}>
@@ -198,7 +198,7 @@ export default function ScannerPage() {
             </div>
 
             {/* Status / Error Banner */}
-            <div className="relative z-10 px-6 mb-6">
+            <div className="relative z-10 px-6 mb-4 shrink-0">
                 <div className={`text-center backdrop-blur-sm px-6 py-3 rounded-2xl border ${error || cameraError ? "bg-red-500/20 border-red-500/30" : "bg-black/30 border-white/10"
                     }`}>
                     {error || cameraError ? (
@@ -216,8 +216,8 @@ export default function ScannerPage() {
             </div>
 
             {/* Scan Frame */}
-            <div className="relative z-10 flex-1 flex items-center justify-center px-12">
-                <div className="relative w-full max-w-[300px] aspect-square">
+            <div className="relative z-10 flex-1 flex items-center justify-center px-16 min-h-0">
+                <div className="relative w-full max-w-[240px] aspect-square">
                     {/* Corner Brackets */}
                     <div className="absolute top-0 left-0 w-10 h-10 border-t-3 border-l-3 border-primary rounded-tl-xl" />
                     <div className="absolute top-0 right-0 w-10 h-10 border-t-3 border-r-3 border-primary rounded-tr-xl" />
@@ -270,20 +270,11 @@ export default function ScannerPage() {
                 </div>
             </div>
 
-            {/* Lighting Indicator */}
-            <div className="relative z-10 flex justify-center mb-6">
-                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
-                    <span className="material-symbols-outlined text-primary text-[18px]">
-                        {cameraActive ? "videocam" : image ? "photo_camera" : "videocam_off"}
-                    </span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-white/80">
-                        {cameraActive ? "Rear Camera Active" : image ? "Photo Mode" : "Camera Unavailable"}
-                    </span>
-                </div>
-            </div>
+            {/* Spacer */}
+            <div className="shrink-0 h-4" />
 
             {/* Bottom Controls */}
-            <div className="relative z-10 flex items-end justify-between px-10 pb-12">
+            <div className="relative z-10 flex items-end justify-between px-10 pb-10 shrink-0">
                 {/* Gallery */}
                 <button onClick={() => fileInputRef.current?.click()} className="flex flex-col items-center gap-2">
                     <div className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center overflow-hidden">
@@ -306,8 +297,8 @@ export default function ScannerPage() {
                         className="flex flex-col items-center gap-2 -mt-4"
                     >
                         <div className={`w-20 h-20 rounded-full flex items-center justify-center shadow-lg border-4 transition-transform active:scale-95 ${isScanning
-                                ? "bg-primary/20 border-primary/50 animate-pulse"
-                                : "bg-primary border-primary/30 shutter-glow"
+                            ? "bg-primary/20 border-primary/50 animate-pulse"
+                            : "bg-primary border-primary/30 shutter-glow"
                             }`}>
                             <span className={`material-symbols-outlined text-4xl ${isScanning ? "text-primary" : "text-black"}`}>
                                 {isScanning ? "hourglass_top" : "biotech"}
@@ -325,8 +316,8 @@ export default function ScannerPage() {
                         className="flex flex-col items-center gap-2 -mt-4"
                     >
                         <div className={`w-20 h-20 rounded-full flex items-center justify-center shadow-lg border-4 transition-transform active:scale-95 ${cameraActive
-                                ? "bg-white border-primary/30 hover:scale-105"
-                                : "bg-white/30 border-white/20"
+                            ? "bg-white border-primary/30 hover:scale-105"
+                            : "bg-white/30 border-white/20"
                             }`}>
                             <span className="material-symbols-outlined text-4xl text-leaf-dark">
                                 {cameraActive ? "photo_camera" : "videocam_off"}
