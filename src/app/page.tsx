@@ -1,39 +1,67 @@
 "use client";
 
 import Link from "next/link";
-import { diseases } from "@/lib/data";
-
-const recentScans = [
-    {
-        name: "Tomato",
-        status: "Early Blight",
-        healthy: false,
-        time: "2h ago",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDx-XuttUDtUwZ-eKhTAhd3eQ-33IpZaFjfv4aOO6gxfTS2Z_04O0dMKaZEsRentaGiohXl386wJp0mKTp0GFD6K2RR8vNvvCOf21XjmvFYx2-NryzlejHLrZrxutBAajYSUIVJhs_vpvLb3aeN232MNmy5zg1zbF94JdmRIbsQ0sgoxltHPOKdCsjNPvnGpiueZUyUt6AhNFoR4HvjkUwa1odo2biw-HxzHzVmDyjQt-Xj6GLemr6PyRPjn5Hyw1RnBwlcgBhUQso",
-        id: "early-blight",
-    },
-    {
-        name: "Monstera",
-        status: "Healthy",
-        healthy: true,
-        time: "5h ago",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDbH85n_YFO7o3W8bewcIMtcGOhUW3GHGUZkSqRjcmkHtvITeKwTNWpLO2cu18asYFM75vDss52m5f5jxq5PsFELbHhIN8BOcG3D7oTOATOlUchMEhfRQXFzmAbSHoYSDRvPCNYws9hfmGZlAsBS_kPOyfeG9DUnW6_-lTJ7QQ5XxvAKJMQo6Usq5iO1QsRJmjNJfsqS8R9KkLpyUwegTp_UtjoDJcEMHWGbH_5x8-iloUKCNFMeGE4IW_lytBEb32-7JayZzOoFSE",
-        id: "powdery-mildew",
-    },
-    {
-        name: "English Rose",
-        status: "Powdery Mildew",
-        healthy: false,
-        time: "Yesterday",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDlYV0I6N9SKm2kWhDXjqRQtiPO_e1vkGbuu4Vu5rQILJNZcWZW9dgzVRPXbhx4k_TeqPzcdBSdVZBj4K5WwDg-cmXZIXSMlCZ6zvZgjlQ2dUhe63xMkFore6R6WJk0-h52vU9VuRDmEYcATIoKTm1YVxKW5TjFYDrqH5zpaw9bdB8AmMM7aIjEhEx9ohWp43aymY2DW5pmdQ0qPJoK5QHDB13nckA6xO0HoWjNbaircNhq22mIlD7eiUSTTzroG8KB14Rmq_Lzsm0",
-        id: "powdery-mildew",
-    },
-];
-
+import { useState, useEffect } from "react";
 import { UserButton, useUser } from "@clerk/nextjs";
 
+interface Scan {
+    id: string;
+    disease_name: string;
+    scientific_name: string;
+    confidence: number;
+    severity: string;
+    is_healthy: boolean;
+    image_url: string | null;
+    created_at: string;
+}
+
+function timeAgo(dateStr: string): string {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return "Just now";
+    if (mins < 60) return `${mins}m ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs}h ago`;
+    const days = Math.floor(hrs / 24);
+    if (days === 1) return "Yesterday";
+    return `${days}d ago`;
+}
+
 export default function HomePage() {
-    const { user } = useUser();
+    const { user, isLoaded } = useUser();
+    const [scans, setScans] = useState<Scan[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    // Fetch real scans from Supabase
+    useEffect(() => {
+        if (!isLoaded || !user) {
+            setLoading(false);
+            return;
+        }
+
+        const fetchScans = async () => {
+            try {
+                const res = await fetch(`/api/scans?userId=${user.id}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    setScans(data.scans || []);
+                }
+            } catch (err) {
+                console.error("Failed to fetch scans:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchScans();
+    }, [user, isLoaded]);
+
+    const greeting = () => {
+        const hour = new Date().getHours();
+        if (hour < 12) return "Good Morning";
+        if (hour < 17) return "Good Afternoon";
+        return "Good Evening";
+    };
 
     return (
         <div className="flex flex-col min-h-screen max-w-md mx-auto bg-white/30">
@@ -44,7 +72,7 @@ export default function HomePage() {
                         Field Dashboard
                     </p>
                     <h1 className="text-3xl font-bold tracking-tight text-leaf-dark">
-                        Good Morning,<br />{user?.firstName || "Gardener"}
+                        {greeting()},<br />{user?.firstName || "Gardener"}
                     </h1>
                 </div>
                 <div className="h-12 w-12 rounded-full flex items-center justify-center overflow-hidden">
@@ -95,46 +123,80 @@ export default function HomePage() {
                         </Link>
                     </div>
 
-                    {/* Horizontal Scroll */}
-                    <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 -mx-6 px-6 snap-x">
-                        {recentScans.map((scan) => (
-                            <Link
-                                key={scan.name + scan.time}
-                                href={`/diagnosis/${scan.id}`}
-                                className="snap-center shrink-0 w-[240px] bg-white rounded-xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-sage relative"
-                            >
-                                {/* Status Indicator */}
-                                <div className="absolute top-3 right-3 z-10">
-                                    {scan.healthy ? (
-                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-primary border-2 border-white" />
-                                    ) : (
-                                        <span className="flex h-3 w-3">
-                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-danger opacity-75" />
-                                            <span className="relative inline-flex rounded-full h-3 w-3 bg-danger border-2 border-white" />
-                                        </span>
-                                    )}
+                    {/* Loading State */}
+                    {loading ? (
+                        <div className="flex gap-4 pb-4">
+                            {[1, 2].map((i) => (
+                                <div key={i} className="shrink-0 w-[240px] bg-white rounded-xl p-3 shadow-sm border border-sage animate-pulse">
+                                    <div className="h-32 w-full rounded-lg bg-gray-200 mb-3" />
+                                    <div className="h-4 w-24 bg-gray-200 rounded mb-2" />
+                                    <div className="h-3 w-16 bg-gray-200 rounded" />
                                 </div>
-
-                                <div className="h-32 w-full rounded-lg bg-gray-100 mb-3 overflow-hidden relative">
-                                    <img
-                                        alt={scan.name}
-                                        className="w-full h-full object-cover"
-                                        src={scan.image}
-                                    />
-                                    <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full">
-                                        {scan.time}
+                            ))}
+                        </div>
+                    ) : scans.length > 0 ? (
+                        /* Real Scans from Supabase */
+                        <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 -mx-6 px-6 snap-x">
+                            {scans.map((scan) => (
+                                <div
+                                    key={scan.id}
+                                    className="snap-center shrink-0 w-[240px] bg-white rounded-xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-sage relative"
+                                >
+                                    {/* Status Indicator */}
+                                    <div className="absolute top-3 right-3 z-10">
+                                        {scan.is_healthy ? (
+                                            <span className="relative inline-flex rounded-full h-3 w-3 bg-primary border-2 border-white" />
+                                        ) : (
+                                            <span className="flex h-3 w-3">
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-danger opacity-75" />
+                                                <span className="relative inline-flex rounded-full h-3 w-3 bg-danger border-2 border-white" />
+                                            </span>
+                                        )}
                                     </div>
+
+                                    <div className="h-32 w-full rounded-lg bg-gray-100 mb-3 overflow-hidden relative flex items-center justify-center">
+                                        {scan.image_url ? (
+                                            <img
+                                                alt={scan.disease_name}
+                                                className="w-full h-full object-cover"
+                                                src={scan.image_url}
+                                            />
+                                        ) : (
+                                            <span className="material-symbols-outlined text-4xl text-gray-300">eco</span>
+                                        )}
+                                        <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full">
+                                            {timeAgo(scan.created_at)}
+                                        </div>
+                                    </div>
+                                    <h3 className="font-bold text-leaf-dark">{scan.disease_name}</h3>
+                                    <p className={`text-sm font-medium flex items-center gap-1 ${scan.is_healthy ? "text-leaf-medium" : "text-danger"}`}>
+                                        <span className="material-symbols-outlined text-[16px]">
+                                            {scan.is_healthy ? "check_circle" : "bug_report"}
+                                        </span>
+                                        {scan.is_healthy ? "Healthy" : scan.severity}
+                                    </p>
                                 </div>
-                                <h3 className="font-bold text-leaf-dark">{scan.name}</h3>
-                                <p className={`text-sm font-medium flex items-center gap-1 ${scan.healthy ? "text-leaf-medium" : "text-danger"}`}>
-                                    <span className="material-symbols-outlined text-[16px]">
-                                        {scan.healthy ? "check_circle" : "bug_report"}
-                                    </span>
-                                    {scan.status}
-                                </p>
+                            ))}
+                        </div>
+                    ) : (
+                        /* Empty State — No Scans Yet */
+                        <div className="bg-white rounded-2xl border border-sage p-8 text-center">
+                            <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                                <span className="material-symbols-outlined text-primary text-3xl">photo_camera</span>
+                            </div>
+                            <h3 className="font-bold text-leaf-dark text-lg mb-1">No scans yet</h3>
+                            <p className="text-sm text-leaf-medium mb-4">
+                                Scan your first plant to see real-time AI diagnostics here.
+                            </p>
+                            <Link
+                                href="/scanner"
+                                className="inline-flex items-center gap-2 bg-primary text-black font-bold px-6 py-2.5 rounded-full text-sm active:scale-95 transition-transform"
+                            >
+                                <span className="material-symbols-outlined text-lg">camera</span>
+                                Start Scanning
                             </Link>
-                        ))}
-                    </div>
+                        </div>
+                    )}
                 </div>
 
                 {/* Garden Tasks */}
