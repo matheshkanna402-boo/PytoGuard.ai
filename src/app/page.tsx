@@ -30,7 +30,11 @@ const recentScans = [
     },
 ];
 
+import { UserButton, useUser } from "@clerk/nextjs";
+
 export default function HomePage() {
+    const { user } = useUser();
+
     return (
         <div className="flex flex-col min-h-screen max-w-md mx-auto bg-white/30">
             {/* Header */}
@@ -40,11 +44,15 @@ export default function HomePage() {
                         Field Dashboard
                     </p>
                     <h1 className="text-3xl font-bold tracking-tight text-leaf-dark">
-                        Good Morning,<br />Gardener
+                        Good Morning,<br />{user?.firstName || "Gardener"}
                     </h1>
                 </div>
-                <div className="h-12 w-12 rounded-full bg-leaf-light flex items-center justify-center border border-white/50 shadow-sm overflow-hidden">
-                    <span className="material-symbols-outlined text-leaf-medium text-2xl">person</span>
+                <div className="h-12 w-12 rounded-full flex items-center justify-center overflow-hidden">
+                    <UserButton afterSignOutUrl="/" appearance={{
+                        elements: {
+                            userButtonAvatarBox: 'h-12 w-12 border border-white/50 shadow-sm'
+                        }
+                    }} />
                 </div>
             </header>
 
